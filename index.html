@@ -1,937 +1,921 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shahul & Safa | Wedding Invitation</title>
-
-<!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
-
-<style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-:root {
-    --brown: #3b2920;
-    --dark-brown: #241711;
-    --brown-light: #765c49;
-    --cream: #f4eee4;
-    --ivory: #fbf8f2;
-    --beige: #e7dccd;
-    --gold: #a98c63;
-    --white: #ffffff;
-    --text: #44362d;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: "DM Sans", sans-serif;
-    background: var(--ivory);
-    color: var(--text);
-    overflow-x: hidden;
-}
-
-img {
-    width: 100%;
-    display: block;
-}
-
-button {
-    font-family: inherit;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-
-/* =========================================================
-   COMMON
-========================================================= */
-
-.section {
-    padding: 100px 20px;
-    position: relative;
-}
-
-.container {
-    width: min(1100px, 92%);
-    margin: auto;
-}
-
-.center {
-    text-align: center;
-}
-
-.eyebrow {
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 11px;
-    color: var(--gold);
-    margin-bottom: 15px;
-}
-
-.section-title {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(45px, 7vw, 75px);
-    font-weight: 400;
-    line-height: 1;
-    color: var(--brown);
-}
-
-.script {
-    font-family: "Great Vibes", cursive;
-    color: var(--brown-light);
-}
-
-.divider {
-    width: 80px;
-    height: 1px;
-    background: var(--gold);
-    margin: 25px auto;
-}
-
-.btn {
-    display: inline-block;
-    padding: 14px 30px;
-    border: 1px solid var(--gold);
-    background: transparent;
-    color: var(--brown);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 11px;
-    transition: .3s;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: var(--brown);
-    color: white;
-}
-
-
-/* =========================================================
-   MUSIC BUTTON
-========================================================= */
-
-.music-btn {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    z-index: 999;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--gold);
-    background: rgba(251,248,242,.92);
-    color: var(--brown);
-    cursor: pointer;
-    font-size: 18px;
-}
-
-
-/* =========================================================
-   ENVELOPE INTRO
-========================================================= */
-
-.intro {
-    position: fixed;
-    inset: 0;
-    z-index: 1000;
-    background: var(--cream);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 1s ease;
-}
-
-.intro.hide {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.intro-content {
-    text-align: center;
-    width: 90%;
-}
-
-.intro-small {
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 10px;
-    color: var(--brown-light);
-}
-
-.intro-names {
-    font-family: "Great Vibes", cursive;
-    font-size: clamp(55px, 12vw, 100px);
-    color: var(--brown);
-    margin: 10px 0 30px;
-}
-
-
-/* Envelope */
-
-.envelope {
-    width: min(430px, 85vw);
-    height: 270px;
-    margin: 0 auto 35px;
-    position: relative;
-    perspective: 1000px;
-}
-
-.envelope-body {
-    position: absolute;
-    inset: 0;
-    background: #d9c9b6;
-    box-shadow: 0 20px 60px rgba(59,41,32,.2);
-    overflow: hidden;
-}
-
-.envelope-body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(135deg, transparent 49.5%, rgba(80,55,42,.18) 50%, transparent 50.5%),
-        linear-gradient(225deg, transparent 49.5%, rgba(80,55,42,.18) 50%, transparent 50.5%);
-}
-
-.envelope-flap {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 0;
-    border-left: 215px solid transparent;
-    border-right: 215px solid transparent;
-    border-top: 140px solid #cdbba7;
-    transform-origin: top;
-    transition: 1s;
-    z-index: 4;
-}
-
-.envelope.open .envelope-flap {
-    transform: rotateX(180deg);
-}
-
-.envelope-letter {
-    position: absolute;
-    width: 78%;
-    height: 75%;
-    background: var(--ivory);
-    left: 11%;
-    bottom: 8%;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    transition: 1s;
-}
-
-.envelope.open .envelope-letter {
-    transform: translateY(-80px);
-}
-
-.letter-text {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 28px;
-    color: var(--brown);
-}
-
-.wax {
-    position: absolute;
-    z-index: 5;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: #754332;
-    color: #e8d4b9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    left: calc(50% - 35px);
-    top: 115px;
-    font-family: "Great Vibes", cursive;
-    font-size: 25px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
-    transition: .6s;
-}
-
-.envelope.open .wax {
-    opacity: 0;
-    transform: scale(.5);
-}
-
-.open-btn {
-    margin-top: 10px;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    min-height: 100vh;
-    background:
-        linear-gradient(rgba(36,23,17,.25), rgba(36,23,17,.45)),
-        url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85")
-        center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    position: relative;
-}
-
-.hero-content {
-    padding: 30px;
-}
-
-.hero-sub {
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    font-size: 11px;
-}
-
-.hero-names {
-    font-family: "Great Vibes", cursive;
-    font-size: clamp(70px, 13vw, 145px);
-    font-weight: 400;
-    line-height: .9;
-    margin: 25px 0;
-}
-
-.hero-date {
-    letter-spacing: 5px;
-    text-transform: uppercase;
-    font-size: 13px;
-}
-
-.scroll {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    letter-spacing: 3px;
-}
-
-
-/* =========================================================
-   INVITATION
-========================================================= */
-
-.invitation {
-    background: var(--ivory);
-}
-
-.invitation-card {
-    max-width: 760px;
-    margin: auto;
-    text-align: center;
-    padding: 50px 25px;
-    border: 1px solid var(--beige);
-    position: relative;
-}
-
-.invitation-card::before,
-.invitation-card::after {
-    content: "✦";
-    position: absolute;
-    font-size: 25px;
-    color: var(--gold);
-}
-
-.invitation-card::before {
-    top: 20px;
-    left: 25px;
-}
-
-.invitation-card::after {
-    bottom: 20px;
-    right: 25px;
-}
-
-.invitation-text {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 25px;
-    line-height: 1.7;
-    max-width: 600px;
-    margin: auto;
-}
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-.date-section {
-    background: var(--brown);
-    color: white;
-}
-
-.date-section .section-title {
-    color: white;
-}
-
-.date-number {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(80px, 15vw, 170px);
-    font-weight: 300;
-    line-height: .9;
-    margin: 20px 0;
-}
-
-.date-month {
-    font-family: "Great Vibes", cursive;
-    font-size: 60px;
-}
-
-
-/* =========================================================
-   COUNTDOWN
-========================================================= */
-
-.countdown-section {
-    background: var(--cream);
-}
-
-.countdown {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 800px;
-    margin: 50px auto 0;
-    border-top: 1px solid var(--beige);
-    border-bottom: 1px solid var(--beige);
-}
-
-.time-box {
-    padding: 30px 10px;
-    text-align: center;
-    border-right: 1px solid var(--beige);
-}
-
-.time-box:last-child {
-    border-right: none;
-}
-
-.time-number {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 55px;
-    color: var(--brown);
-}
-
-.time-label {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 9px;
-    color: var(--brown-light);
-}
-
-
-/* =========================================================
-   EVENTS
-========================================================= */
-
-.events {
-    background: var(--ivory);
-}
-
-.event-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 60px;
-}
-
-.event-card {
-    padding: 50px 35px;
-    text-align: center;
-    border: 1px solid var(--beige);
-    background: white;
-    transition: .3s;
-}
-
-.event-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(59,41,32,.08);
-}
-
-.event-icon {
-    font-size: 30px;
-    color: var(--gold);
-    margin-bottom: 20px;
-}
-
-.event-title {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 45px;
-    font-weight: 400;
-    color: var(--brown);
-}
-
-.event-date {
-    margin: 15px 0;
-    font-size: 13px;
-    letter-spacing: 1px;
-}
-
-.event-place {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 22px;
-    color: var(--brown-light);
-    margin-bottom: 25px;
-}
-
-.event-time {
-    font-size: 12px;
-    margin-bottom: 25px;
-}
-
-
-/* =========================================================
-   STORY
-========================================================= */
-
-.story {
-    background: var(--cream);
-}
-
-.story-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 70px;
-    align-items: center;
-    margin-top: 60px;
-}
-
-.story-image {
-    height: 600px;
-    object-fit: cover;
-}
-
-.story-content p {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 23px;
-    line-height: 1.7;
-    margin-bottom: 25px;
-}
-
-.story-signature {
-    font-family: "Great Vibes", cursive;
-    font-size: 45px;
-    color: var(--brown);
-}
-
-
-/* =========================================================
-   GALLERY
-========================================================= */
-
-.gallery {
-    background: var(--ivory);
-}
-
-.gallery-grid {
-    margin-top: 60px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.gallery-item {
-    height: 400px;
-    overflow: hidden;
-}
-
-.gallery-item.large {
-    grid-column: span 2;
-}
-
-.gallery-item img {
-    height: 100%;
-    object-fit: cover;
-    transition: transform .6s;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-
-/* =========================================================
-   TIMELINE
-========================================================= */
-
-.timeline {
-    background: var(--cream);
-}
-
-.timeline-list {
-    max-width: 650px;
-    margin: 60px auto 0;
-}
-
-.timeline-item {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 30px;
-    padding: 25px 0;
-    border-bottom: 1px solid var(--beige);
-}
-
-.timeline-time {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 24px;
-    color: var(--gold);
-}
-
-.timeline-title {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 27px;
-    color: var(--brown);
-}
-
-.timeline-desc {
-    margin-top: 5px;
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   DRESS CODE
-========================================================= */
-
-.dress {
-    background: var(--brown);
-    color: white;
-}
-
-.dress .section-title {
-    color: white;
-}
-
-.dress-text {
-    max-width: 600px;
-    margin: 30px auto;
-    line-height: 1.8;
-}
-
-.dress-code {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 40px;
-}
-
-
-/* =========================================================
-   LOCATION
-========================================================= */
-
-.location {
-    background: var(--ivory);
-}
-
-.location-card {
-    max-width: 850px;
-    margin: 50px auto 0;
-    background: var(--cream);
-    text-align: center;
-    padding: 60px 30px;
-}
-
-.location-name {
-    font-family: "Cormorant Garamond", serif;
-    font-size: 45px;
-    color: var(--brown);
-}
-
-.location-address {
-    margin: 15px 0 30px;
-    line-height: 1.7;
-}
-
-
-/* =========================================================
-   RSVP
-========================================================= */
-
-.rsvp {
-    background: var(--cream);
-}
-
-.rsvp-box {
-    max-width: 650px;
-    margin: 50px auto 0;
-    background: white;
-    padding: 45px;
-    border: 1px solid var(--beige);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid var(--beige);
-    background: var(--ivory);
-    font-family: inherit;
-    outline: none;
-}
-
-.form-group textarea {
-    height: 110px;
-    resize: vertical;
-}
-
-.rsvp-message {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background: #eee6db;
-    text-align: center;
-}
-
-
-/* =========================================================
-   FINAL
-========================================================= */
-
-.final {
-    min-height: 70vh;
-    background:
-        linear-gradient(rgba(36,23,17,.35), rgba(36,23,17,.6)),
-        url("https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1800&q=85")
-        center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-}
-
-.final-small {
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    font-size: 11px;
-}
-
-.final-names {
-    font-family: "Great Vibes", cursive;
-    font-size: clamp(70px, 12vw, 130px);
-    margin: 25px 0;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    background: var(--dark-brown);
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
-}
-
-.footer-names {
-    font-family: "Great Vibes", cursive;
-    font-size: 40px;
-    margin-bottom: 10px;
-}
-
-footer p {
-    font-size: 10px;
-    letter-spacing: 2px;
-    opacity: .7;
-}
-
-
-/* =========================================================
-   FADE ANIMATION
-========================================================= */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 1s ease;
-}
-
-.reveal.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width: 768px) {
-
-    .section {
-        padding: 75px 15px;
-    }
-
-    .envelope {
-        height: 210px;
-    }
-
-    .envelope-flap {
-        border-left-width: 42.5vw;
-        border-right-width: 42.5vw;
-        border-top-width: 110px;
-    }
-
-    .wax {
-        top: 85px;
-    }
-
-    .hero-names {
-        font-size: 75px;
-    }
-
-    .countdown {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .time-box:nth-child(2) {
-        border-right: none;
-    }
-
-    .time-box:nth-child(1),
-    .time-box:nth-child(2) {
-        border-bottom: 1px solid var(--beige);
-    }
-
-    .event-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .story-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-
-    .story-image {
-        height: 450px;
-    }
-
-    .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .gallery-item {
-        height: 260px;
-    }
-
-    .gallery-item.large {
-        grid-column: span 2;
-    }
-
-    .timeline-item {
-        grid-template-columns: 75px 1fr;
-        gap: 15px;
-    }
-
-    .rsvp-box {
-        padding: 25px 20px;
-    }
-
-    .location-name {
-        font-size: 35px;
-    }
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shahul & Safa</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #eee5d8;
+            color: #7e654b;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           COMMON
+        ===================================================== */
+
+        section {
+            width: 100%;
+            position: relative;
+        }
+
+
+        /* =====================================================
+           1. VIDEO OPENING
+        ===================================================== */
+
+        .video-section {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+            background: #d9cbbb;
+        }
+
+        .wedding-video {
+            position: absolute;
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        /*
+        Soft ivory overlay.
+        This makes the video look more like
+        the reference instead of a normal video.
+        */
+
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(244, 235, 220, 0.25),
+                    rgba(110, 82, 55, 0.18)
+                );
+
+            z-index: 2;
+        }
+
+
+        /* Video content */
+
+        .video-content {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            text-align: center;
+
+            z-index: 3;
+
+            width: 90%;
+        }
+
+        .bismillah {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: clamp(22px, 3vw, 34px);
+
+            color: #806747;
+
+            margin-bottom: 35px;
+
+            letter-spacing: 1px;
+        }
+
+        .video-names {
+            font-family: "Great Vibes", cursive;
+
+            font-size: clamp(70px, 10vw, 145px);
+
+            font-weight: 400;
+
+            color: #755a3e;
+
+            line-height: 1;
+        }
+
+        .video-date {
+            margin-top: 30px;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 18px;
+
+            letter-spacing: 5px;
+
+            color: #7d6549;
+
+            text-transform: uppercase;
+        }
+
+
+        /* Scroll indicator */
+
+        .scroll-indicator {
+            position: absolute;
+
+            bottom: 35px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 4;
+
+            color: #755d43;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 13px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            text-align: center;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 45px;
+
+            background: #9d8262;
+
+            margin: 12px auto 0;
+        }
+
+
+        /* =====================================================
+           2. GRAPHIC IMAGE SECTION
+        ===================================================== */
+
+        .graphic-section {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eee5d8;
+
+            overflow: hidden;
+        }
+
+
+        /*
+        Very subtle background gradient.
+        Gives the page the same soft ivory feeling.
+        */
+
+        .graphic-background {
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,255,255,.65),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 75%,
+                    rgba(188,160,125,.16),
+                    transparent 35%
+                );
+        }
+
+
+        .graphic-wrapper {
+            width: min(850px, 90%);
+
+            position: relative;
+
+            z-index: 2;
+
+            text-align: center;
+        }
+
+
+        /*
+        Your static graphic.
+
+        Replace images/graphic.jpg with your own
+        beige/ivory wedding illustration.
+        */
+
+        .graphic-image {
+            width: 100%;
+
+            height: min(75vh, 700px);
+
+            object-fit: cover;
+
+            border-radius: 2px;
+
+            opacity: .94;
+
+            filter:
+                sepia(.08)
+                saturate(.75)
+                contrast(.95);
+
+            box-shadow:
+                0 20px 60px rgba(83,61,43,.12);
+        }
+
+
+        /* soft gradient over graphic */
+
+        .graphic-overlay {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(238,229,216,0.05),
+                    rgba(238,229,216,0.35)
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           3. ENVELOPE / INVITATION
+        ===================================================== */
+
+        .invitation-section {
+            min-height: 100vh;
+
+            background: #e9dfd1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 70px 20px;
+
+            overflow: hidden;
+        }
+
+
+        /*
+        Decorative background
+        */
+
+        .invitation-section::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255,255,255,.35),
+                    transparent 55%
+                );
+
+            pointer-events: none;
+        }
+
+
+        .envelope-container {
+            position: relative;
+
+            width: min(900px, 94vw);
+
+            height: min(650px, 75vh);
+
+            min-height: 500px;
+
+            perspective: 1600px;
+
+            z-index: 2;
+        }
+
+
+        /* Envelope */
+
+        .envelope {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: 100%;
+            height: 100%;
+
+            background: #e4d7c6;
+
+            box-shadow:
+                0 30px 80px rgba(74,52,35,.18);
+
+            overflow: visible;
+        }
+
+
+        /*
+        Envelope texture
+        */
+
+        .envelope::after {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            opacity: .18;
+
+            pointer-events: none;
+
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(120,90,60,.05) 0px,
+                    rgba(120,90,60,.05) 1px,
+                    transparent 1px,
+                    transparent 4px
+                );
+        }
+
+
+        /* Left flap */
+
+        .flap-left {
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 0;
+
+            border-top: 325px solid transparent;
+            border-bottom: 325px solid transparent;
+
+            border-left: 450px solid #ded0be;
+
+            z-index: 2;
+        }
+
+
+        /* Right flap */
+
+        .flap-right {
+            position: absolute;
+
+            right: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 0;
+
+            border-top: 325px solid transparent;
+            border-bottom: 325px solid transparent;
+
+            border-right: 450px solid #ded0be;
+
+            z-index: 2;
+        }
+
+
+        /* Bottom flap */
+
+        .flap-bottom {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            width: 0;
+            height: 0;
+
+            border-left: 450px solid transparent;
+            border-right: 450px solid transparent;
+
+            border-bottom: 330px solid #d6c5b1;
+
+            z-index: 4;
+        }
+
+
+        /* Top flap */
+
+        .flap-top {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 0;
+            height: 0;
+
+            border-left: 450px solid transparent;
+            border-right: 450px solid transparent;
+
+            border-top: 330px solid #e8dccd;
+
+            transform-origin: top center;
+
+            transition:
+                transform 1.5s cubic-bezier(.65,.05,.36,1);
+
+            z-index: 7;
+        }
+
+
+        /* Invitation paper */
+
+        .invitation-paper {
+            position: absolute;
+
+            left: 10%;
+            bottom: 5%;
+
+            width: 80%;
+            height: 82%;
+
+            background: #faf6ee;
+
+            z-index: 3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            box-shadow:
+                0 10px 30px rgba(70,50,35,.12);
+
+            transition:
+                transform 1.5s cubic-bezier(.65,.05,.36,1);
+        }
+
+
+        .paper-content {
+            padding: 30px;
+        }
+
+        .paper-small {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 17px;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            color: #967a5a;
+
+            margin-bottom: 25px;
+        }
+
+        .paper-names {
+            font-family: "Great Vibes", cursive;
+
+            font-size: clamp(60px, 8vw, 100px);
+
+            color: #755a3e;
+
+            line-height: 1;
+        }
+
+        .paper-date {
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 18px;
+
+            letter-spacing: 5px;
+
+            margin-top: 30px;
+
+            color: #80684d;
+        }
+
+
+        /* Wax seal */
+
+        .wax-seal {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            width: 115px;
+            height: 145px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #f0dfc9,
+                    #cdb292
+                );
+
+            border: 4px solid #d5b995;
+
+            box-shadow:
+                0 12px 25px rgba(75,52,35,.22),
+                inset 0 0 0 3px rgba(255,255,255,.25);
+
+            z-index: 9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            transition:
+                opacity .7s ease,
+                transform .7s ease;
+        }
+
+        .wax-seal::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 8px;
+
+            border: 1px solid rgba(112,82,51,.25);
+
+            border-radius: 50%;
+        }
+
+        .seal-symbol {
+            font-family: "Great Vibes", cursive;
+
+            font-size: 30px;
+
+            color: #866d50;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .seal-flower {
+            font-size: 18px;
+
+            color: #9b805e;
+
+            margin-bottom: 4px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* Open invitation text */
+
+        .open-invitation {
+            position: absolute;
+
+            left: 50%;
+
+            bottom: -65px;
+
+            transform: translateX(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #876d50;
+
+            font-family: "Cormorant Garamond", serif;
+
+            font-size: 14px;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            z-index: 20;
+
+            transition: .3s;
+        }
+
+        .open-invitation:hover {
+            letter-spacing: 7px;
+        }
+
+
+        /* =====================================================
+           OPEN ANIMATION
+        ===================================================== */
+
+        .invitation-section.open .flap-top {
+            transform: rotateX(180deg);
+        }
+
+        .invitation-section.open .invitation-paper {
+            transform: translateY(-190px);
+        }
+
+        .invitation-section.open .wax-seal {
+            opacity: 0;
+
+            transform:
+                translate(-50%, -50%)
+                scale(.6);
+        }
+
+        .invitation-section.open .open-invitation {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 768px) {
+
+            .video-section {
+                min-height: 100svh;
+            }
+
+            .video-names {
+                font-size: 72px;
+            }
+
+            .video-date {
+                font-size: 12px;
+                letter-spacing: 3px;
+            }
+
+            .graphic-section {
+                min-height: 80vh;
+            }
+
+            .graphic-image {
+                height: 65vh;
+            }
+
+            .envelope-container {
+                height: 430px;
+                min-height: 430px;
+            }
+
+            .flap-left {
+                border-top-width: 215px;
+                border-bottom-width: 215px;
+                border-left-width: 47vw;
+            }
+
+            .flap-right {
+                border-top-width: 215px;
+                border-bottom-width: 215px;
+                border-right-width: 47vw;
+            }
+
+            .flap-bottom {
+                border-left-width: 47vw;
+                border-right-width: 47vw;
+                border-bottom-width: 220px;
+            }
+
+            .flap-top {
+                border-left-width: 47vw;
+                border-right-width: 47vw;
+                border-top-width: 220px;
+            }
+
+            .invitation-paper {
+                left: 8%;
+                width: 84%;
+                height: 78%;
+            }
+
+            .wax-seal {
+                width: 85px;
+                height: 105px;
+            }
+
+            .seal-symbol {
+                font-size: 24px;
+            }
+
+            .open-invitation {
+                bottom: -55px;
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+        }
+
+    </style>
 </head>
 
 
 <body>
 
 
-<!-- ======================================================
-     MUSIC
-====================================================== -->
+<!-- =====================================================
+     SECTION 1
+     VIDEO
+===================================================== -->
 
-<button class="music-btn" id="musicBtn">♫</button>
+<section class="video-section">
 
-<audio id="music" loop>
-    <!-- Replace with your own music file -->
-    <!-- Example: music.mp3 -->
-</audio>
+    <video
+        class="wedding-video"
+        autoplay
+        muted
+        loop
+        playsinline>
+
+        <source
+            src="video/wedding.mp4"
+            type="video/mp4">
+
+    </video>
 
 
-<!-- ======================================================
-     OPENING ENVELOPE
-====================================================== -->
+    <div class="video-overlay"></div>
 
-<section class="intro" id="intro">
 
-    <div class="intro-content">
+    <div class="video-content">
 
-        <div class="intro-small">
-            A Special Invitation
+        <div class="bismillah">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
         </div>
 
-        <div class="intro-names">
+        <div class="video-names">
             Shahul & Safa
         </div>
 
-        <div class="envelope" id="envelope">
+        <div class="video-date">
+            22 November 2026
+        </div>
 
-            <div class="envelope-body"></div>
+    </div>
 
-            <div class="envelope-letter">
-                <div class="letter-text">
-                    You are<br>
-                    invited
+
+    <div class="scroll-indicator">
+
+        Scroll to discover
+
+        <div class="scroll-line"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SECTION 2
+     STATIC GRAPHIC
+===================================================== -->
+
+<section class="graphic-section">
+
+    <div class="graphic-background"></div>
+
+
+    <div class="graphic-wrapper">
+
+        <img
+            src="images/graphic.jpg"
+            class="graphic-image"
+            alt="Shahul and Safa Wedding Graphic">
+
+        <div class="graphic-overlay"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SECTION 3
+     INVITATION ENVELOPE
+===================================================== -->
+
+<section
+    class="invitation-section"
+    id="invitation">
+
+
+    <div class="envelope-container">
+
+        <div class="envelope">
+
+
+            <!-- Invitation paper -->
+
+            <div class="invitation-paper">
+
+                <div class="paper-content">
+
+                    <div class="paper-small">
+                        Together with their families
+                    </div>
+
+                    <div class="paper-names">
+                        Shahul & Safa
+                    </div>
+
+                    <div class="paper-date">
+                        22 · 11 · 2026
+                    </div>
+
                 </div>
+
             </div>
 
-            <div class="envelope-flap"></div>
 
-            <div class="wax">
-                S&S
+            <!-- Envelope flaps -->
+
+            <div class="flap-left"></div>
+
+            <div class="flap-right"></div>
+
+            <div class="flap-bottom"></div>
+
+            <div class="flap-top"></div>
+
+
+            <!-- Wax seal -->
+
+            <div class="wax-seal">
+
+                <div class="seal-flower">
+                    ✿
+                </div>
+
+                <div class="seal-symbol">
+                    S & S
+                </div>
+
             </div>
 
         </div>
 
-        <button class="btn open-btn" id="openBtn">
-            Open Invitation
+
+        <!-- Open invitation -->
+
+        <button
+            class="open-invitation"
+            id="openInvitation">
+
+            Open The Invitation
+
         </button>
 
     </div>
@@ -939,996 +923,69 @@ footer p {
 </section>
 
 
-<!-- ======================================================
-     HERO
-====================================================== -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="hero-sub">
-            Together with their families
-        </div>
-
-        <div class="hero-names">
-            Shahul & Safa
-        </div>
-
-        <div class="hero-date">
-            22 November 2026
-        </div>
-
-    </div>
-
-    <div class="scroll">
-        SCROLL TO DISCOVER
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     INVITATION
-====================================================== -->
-
-<section class="section invitation">
-
-    <div class="container">
-
-        <div class="invitation-card reveal">
-
-            <div class="eyebrow">
-                With Love
-            </div>
-
-            <h2 class="section-title">
-                You're Invited
-            </h2>
-
-            <div class="divider"></div>
-
-            <p class="invitation-text">
-
-                Together with our families,
-                we joyfully invite you to celebrate
-                the beginning of our new journey
-                together.
-
-                <br><br>
-
-                Your presence and blessings
-                would mean the world to us.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     DATE
-====================================================== -->
-
-<section class="section date-section">
-
-    <div class="container center reveal">
-
-        <div class="eyebrow">
-            Save The Date
-        </div>
-
-        <div class="date-number">
-            22
-        </div>
-
-        <div class="date-month">
-            November
-        </div>
-
-        <div style="letter-spacing:5px;margin-top:15px;">
-            2026
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     COUNTDOWN
-====================================================== -->
-
-<section class="section countdown-section">
-
-    <div class="container center reveal">
-
-        <div class="eyebrow">
-            Counting Down To Our Day
-        </div>
-
-        <h2 class="section-title">
-            Almost There
-        </h2>
-
-        <div class="countdown">
-
-            <div class="time-box">
-                <div class="time-number" id="days">00</div>
-                <div class="time-label">Days</div>
-            </div>
-
-            <div class="time-box">
-                <div class="time-number" id="hours">00</div>
-                <div class="time-label">Hours</div>
-            </div>
-
-            <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
-                <div class="time-label">Minutes</div>
-            </div>
-
-            <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
-                <div class="time-label">Seconds</div>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     EVENTS
-====================================================== -->
-
-<section class="section events">
-
-    <div class="container">
-
-        <div class="center reveal">
-
-            <div class="eyebrow">
-                Join Us
-            </div>
-
-            <h2 class="section-title">
-                Wedding Events
-            </h2>
-
-        </div>
-
-
-        <div class="event-grid">
-
-            <!-- NIKAH -->
-
-            <div class="event-card reveal">
-
-                <div class="event-icon">
-                    ✦
-                </div>
-
-                <div class="eyebrow">
-                    The Nikah
-                </div>
-
-                <h3 class="event-title">
-                    Nikah
-                </h3>
-
-                <div class="event-date">
-                    Sunday · 22 November 2026
-                </div>
-
-                <div class="event-time">
-                    10:00 AM
-                </div>
-
-                <div class="event-place">
-                    Wedding Venue
-                </div>
-
-                <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    class="btn">
-                    Get Directions
-                </a>
-
-            </div>
-
-
-            <!-- RECEPTION -->
-
-            <div class="event-card reveal">
-
-                <div class="event-icon">
-                    ✦
-                </div>
-
-                <div class="eyebrow">
-                    The Celebration
-                </div>
-
-                <h3 class="event-title">
-                    Reception
-                </h3>
-
-                <div class="event-date">
-                    Sunday · 22 November 2026
-                </div>
-
-                <div class="event-time">
-                    06:30 PM
-                </div>
-
-                <div class="event-place">
-                    Reception Venue
-                </div>
-
-                <a
-                    href="https://maps.google.com"
-                    target="_blank"
-                    class="btn">
-                    Get Directions
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     STORY
-====================================================== -->
-
-<section class="section story">
-
-    <div class="container">
-
-        <div class="center reveal">
-
-            <div class="eyebrow">
-                Our Journey
-            </div>
-
-            <h2 class="section-title">
-                Our Story
-            </h2>
-
-        </div>
-
-
-        <div class="story-grid">
-
-            <div class="reveal">
-
-                <!-- Replace this image -->
-                <img
-                    class="story-image"
-                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85"
-                    alt="Shahul and Safa">
-
-            </div>
-
-
-            <div class="story-content reveal">
-
-                <p>
-                    Every love story is beautiful,
-                    but ours is our favourite.
-                </p>
-
-                <p>
-                    What started as two separate journeys
-                    slowly became one beautiful path.
-                    Through laughter, memories and countless
-                    moments, we found something truly special.
-                </p>
-
-                <p>
-                    Now, we are excited to begin
-                    the next chapter of our lives together.
-                </p>
-
-                <div class="story-signature">
-                    Shahul & Safa
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     GALLERY
-====================================================== -->
-
-<section class="section gallery">
-
-    <div class="container">
-
-        <div class="center reveal">
-
-            <div class="eyebrow">
-                Memories
-            </div>
-
-            <h2 class="section-title">
-                A Few Moments
-            </h2>
-
-        </div>
-
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item large reveal">
-                <img
-                    src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85"
-                    alt="">
-            </div>
-
-            <div class="gallery-item reveal">
-                <img
-                    src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=85"
-                    alt="">
-            </div>
-
-            <div class="gallery-item reveal">
-                <img
-                    src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=85"
-                    alt="">
-            </div>
-
-            <div class="gallery-item large reveal">
-                <img
-                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=85"
-                    alt="">
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     TIMELINE
-====================================================== -->
-
-<section class="section timeline">
-
-    <div class="container">
-
-        <div class="center reveal">
-
-            <div class="eyebrow">
-                The Day
-            </div>
-
-            <h2 class="section-title">
-                Wedding Timeline
-            </h2>
-
-        </div>
-
-
-        <div class="timeline-list">
-
-            <div class="timeline-item reveal">
-
-                <div class="timeline-time">
-                    10:00
-                </div>
-
-                <div>
-                    <div class="timeline-title">
-                        Nikah
-                    </div>
-
-                    <div class="timeline-desc">
-                        The beginning of our forever.
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item reveal">
-
-                <div class="timeline-time">
-                    12:30
-                </div>
-
-                <div>
-                    <div class="timeline-title">
-                        Lunch
-                    </div>
-
-                    <div class="timeline-desc">
-                        Join us for a beautiful meal.
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item reveal">
-
-                <div class="timeline-time">
-                    18:30
-                </div>
-
-                <div>
-                    <div class="timeline-title">
-                        Reception
-                    </div>
-
-                    <div class="timeline-desc">
-                        Let the celebration begin.
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="timeline-item reveal">
-
-                <div class="timeline-time">
-                    21:30
-                </div>
-
-                <div>
-                    <div class="timeline-title">
-                        Farewell
-                    </div>
-
-                    <div class="timeline-desc">
-                        Until we meet again.
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     DRESS CODE
-====================================================== -->
-
-<section class="section dress">
-
-    <div class="container center reveal">
-
-        <div class="eyebrow">
-            What To Wear
-        </div>
-
-        <h2 class="section-title">
-            Dress Code
-        </h2>
-
-        <div class="divider"></div>
-
-        <div class="dress-code">
-            Elegant & Traditional
-        </div>
-
-        <p class="dress-text">
-            We would love to see you dressed in
-            your favourite traditional or elegant attire
-            as we celebrate this special occasion together.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     LOCATION
-====================================================== -->
-
-<section class="section location">
-
-    <div class="container center reveal">
-
-        <div class="eyebrow">
-            Find Us
-        </div>
-
-        <h2 class="section-title">
-            Location
-        </h2>
-
-
-        <div class="location-card">
-
-            <div class="location-name">
-                Wedding Venue
-            </div>
-
-            <div class="divider"></div>
-
-            <p class="location-address">
-                Your Wedding Venue<br>
-                Kerala, India
-            </p>
-
-            <a
-                href="https://maps.google.com"
-                target="_blank"
-                class="btn">
-                Open Google Maps
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     RSVP
-====================================================== -->
-
-<section class="section rsvp">
-
-    <div class="container">
-
-        <div class="center reveal">
-
-            <div class="eyebrow">
-                We Hope You Can Join Us
-            </div>
-
-            <h2 class="section-title">
-                RSVP
-            </h2>
-
-            <div class="divider"></div>
-
-        </div>
-
-
-        <div class="rsvp-box reveal">
-
-            <form id="rsvpForm">
-
-                <div class="form-group">
-
-                    <label>
-                        Your Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="guestName"
-                        placeholder="Enter your name"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Will you attend?
-                    </label>
-
-                    <select id="attendance" required>
-
-                        <option value="">
-                            Please select
-                        </option>
-
-                        <option value="Yes">
-                            Yes, I will be there
-                        </option>
-
-                        <option value="No">
-                            Sorry, I can't attend
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Number of Guests
-                    </label>
-
-                    <select id="guests">
-
-                        <option value="1">
-                            1 Guest
-                        </option>
-
-                        <option value="2">
-                            2 Guests
-                        </option>
-
-                        <option value="3">
-                            3 Guests
-                        </option>
-
-                        <option value="4">
-                            4 Guests
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Message
-                    </label>
-
-                    <textarea
-                        id="message"
-                        placeholder="Leave us a message..."></textarea>
-
-                </div>
-
-
-                <button
-                    type="submit"
-                    class="btn"
-                    style="width:100%;">
-                    Send RSVP
-                </button>
-
-
-                <div
-                    class="rsvp-message"
-                    id="rsvpMessage">
-
-                    Thank you! Your RSVP is ready to send.
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     FINAL
-====================================================== -->
-
-<section class="final">
-
-    <div class="reveal">
-
-        <div class="final-small">
-            We can't wait to celebrate with you
-        </div>
-
-        <div class="final-names">
-            Shahul & Safa
-        </div>
-
-        <div>
-            22 · 11 · 2026
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ======================================================
-     FOOTER
-====================================================== -->
-
-<footer>
-
-    <div class="footer-names">
-        Shahul & Safa
-    </div>
-
-    <p>
-        MADE WITH LOVE · 2026
-    </p>
-
-</footer>
-
 
 <script>
 
-/* =========================================================
-   ENVELOPE
-========================================================= */
 
-const intro = document.getElementById("intro");
-const envelope = document.getElementById("envelope");
-const openBtn = document.getElementById("openBtn");
+/* =====================================================
+   OPEN INVITATION
+===================================================== */
 
-openBtn.addEventListener("click", function () {
+const invitationSection =
+    document.getElementById("invitation");
 
-    envelope.classList.add("open");
+const openInvitation =
+    document.getElementById("openInvitation");
 
-    setTimeout(function () {
 
-        intro.classList.add("hide");
+openInvitation.addEventListener("click", function () {
 
-    }, 1300);
+    invitationSection.classList.add("open");
 
 });
 
 
-/* =========================================================
-   COUNTDOWN
-========================================================= */
+/* =====================================================
+   AUTO PLAY VIDEO
+===================================================== */
 
-const weddingDate =
-    new Date("November 22, 2026 10:00:00").getTime();
-
-
-function updateCountdown() {
-
-    const now = new Date().getTime();
-
-    const distance = weddingDate - now;
+const video =
+    document.querySelector(".wedding-video");
 
 
-    if (distance <= 0) {
+/*
+Browsers normally allow autoplay only
+when the video is muted.
 
-        document.getElementById("days").innerText = "00";
-        document.getElementById("hours").innerText = "00";
-        document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00";
-
-        return;
-
-    }
+This keeps it muted initially.
+*/
 
 
-    const days =
-        Math.floor(distance / (1000 * 60 * 60 * 24));
+video.play().catch(function () {
 
-    const hours =
-        Math.floor(
-            (distance % (1000 * 60 * 60 * 24))
-            / (1000 * 60 * 60)
-        );
-
-    const minutes =
-        Math.floor(
-            (distance % (1000 * 60 * 60))
-            / (1000 * 60)
-        );
-
-    const seconds =
-        Math.floor(
-            (distance % (1000 * 60))
-            / 1000
-        );
-
-
-    document.getElementById("days").innerText =
-        String(days).padStart(2, "0");
-
-    document.getElementById("hours").innerText =
-        String(hours).padStart(2, "0");
-
-    document.getElementById("minutes").innerText =
-        String(minutes).padStart(2, "0");
-
-    document.getElementById("seconds").innerText =
-        String(seconds).padStart(2, "0");
-
-}
-
-
-updateCountdown();
-
-setInterval(updateCountdown, 1000);
-
-
-/* =========================================================
-   MUSIC
-========================================================= */
-
-const music = document.getElementById("music");
-const musicBtn = document.getElementById("musicBtn");
-
-let playing = false;
-
-musicBtn.addEventListener("click", function () {
-
-    if (!playing) {
-
-        music.play()
-        .then(function () {
-
-            playing = true;
-            musicBtn.innerText = "❚❚";
-
-        })
-        .catch(function () {
-
-            alert(
-                "Please add a music file to the audio element."
-            );
-
-        });
-
-    } else {
-
-        music.pause();
-
-        playing = false;
-
-        musicBtn.innerText = "♫";
-
-    }
+    console.log("Video autoplay requires user interaction.");
 
 });
 
 
-/* =========================================================
-   RSVP
-========================================================= */
+/* =====================================================
+   OPTIONAL:
+   CLICK ENVELOPE ALSO OPENS IT
+===================================================== */
 
-const rsvpForm =
-    document.getElementById("rsvpForm");
-
-rsvpForm.addEventListener("submit", function(event) {
-
-    event.preventDefault();
+const envelope =
+    document.querySelector(".envelope");
 
 
-    const name =
-        document.getElementById("guestName").value;
+envelope.addEventListener("click", function () {
 
-    const attendance =
-        document.getElementById("attendance").value;
-
-    const guests =
-        document.getElementById("guests").value;
-
-    const message =
-        document.getElementById("message").value;
-
-
-    /*
-       CHANGE THIS NUMBER
-
-       Example Qatar:
-       974XXXXXXXX
-
-       Example India:
-       91XXXXXXXXXX
-    */
-
-    const phone = "974XXXXXXXX";
-
-
-    const whatsappMessage =
-        `Wedding RSVP%0A%0A` +
-        `Name: ${encodeURIComponent(name)}%0A` +
-        `Attendance: ${encodeURIComponent(attendance)}%0A` +
-        `Guests: ${encodeURIComponent(guests)}%0A` +
-        `Message: ${encodeURIComponent(message)}`;
-
-
-    const whatsappURL =
-        `https://wa.me/${phone}?text=${whatsappMessage}`;
-
-
-    document.getElementById("rsvpMessage").style.display =
-        "block";
-
-
-    window.open(
-        whatsappURL,
-        "_blank"
-    );
+    invitationSection.classList.add("open");
 
 });
 
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-const revealOnScroll = function() {
-
-    const windowHeight =
-        window.innerHeight;
-
-
-    revealElements.forEach(function(element) {
-
-        const elementTop =
-            element.getBoundingClientRect().top;
-
-
-        if (elementTop < windowHeight - 80) {
-
-            element.classList.add("show");
-
-        }
-
-    });
-
-};
-
-
-window.addEventListener(
-    "scroll",
-    revealOnScroll
-);
-
-revealOnScroll();
-
-
-/* =========================================================
-   URL INVITATION TYPE
-========================================================= */
-
-const params =
-    new URLSearchParams(window.location.search);
-
-const invite =
-    params.get("invite");
-
-
-if (invite === "reception") {
-
-    console.log(
-        "Reception invitation opened"
-    );
-
-}
-
-
-if (invite === "nikah") {
-
-    console.log(
-        "Nikah invitation opened"
-    );
-
-}
 
 </script>
+
 
 </body>
 </html>
