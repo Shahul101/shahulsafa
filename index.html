@@ -2,59 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Wedding invitation of Shahul & Safa">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Shahul & Safa | Wedding Invitation</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- =========================================
-     OPENING SCREEN
-========================================= -->
+<!-- =====================================================
+     MUSIC
+===================================================== -->
 
-<div id="opening-screen">
+<audio id="weddingMusic" loop>
+    <source src="music/wedding.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="opening-content">
+<button class="music-button" id="musicButton">
+    ♫
+</button>
 
-        <p class="arabic">
-            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
+
+<!-- =====================================================
+     ENVELOPE INTRO
+===================================================== -->
+
+<div class="envelope-screen" id="envelopeScreen">
+
+    <div class="envelope-wrapper">
+
+        <p class="intro-small">
+            TOGETHER WITH THEIR FAMILIES
         </p>
 
-        <p class="small-text">
-            Together with their families
-        </p>
+        <div class="envelope">
 
-        <h1>
-            Shahul
-            <span>&</span>
-            Safa
-        </h1>
+            <div class="envelope-back"></div>
 
-        <p class="opening-date">
-            We are getting married
-        </p>
+            <div class="envelope-paper">
 
-        <button id="openInvitation">
-            Open Invitation
+                <p class="paper-small">
+                    YOU ARE INVITED
+                </p>
+
+                <h1>
+                    Shahul
+                    <span>&</span>
+                    Safa
+                </h1>
+
+                <p>
+                    22 November 2026
+                </p>
+
+            </div>
+
+            <div class="envelope-flap"></div>
+
+            <div class="wax-seal">
+                S & S
+            </div>
+
+        </div>
+
+        <button class="open-button" id="openButton">
+            OPEN INVITATION
         </button>
 
     </div>
@@ -62,16 +80,20 @@
 </div>
 
 
-<!-- =========================================
+<!-- =====================================================
      MAIN WEBSITE
-========================================= -->
+===================================================== -->
 
-<main id="main-content">
+<div class="website" id="website">
 
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
 <section class="hero">
+
+    <div class="hero-image"></div>
 
     <div class="hero-overlay"></div>
 
@@ -81,8 +103,8 @@
             بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
         </p>
 
-        <p class="invite-text">
-            With the blessings of our families
+        <p class="eyebrow">
+            WITH THE BLESSINGS OF OUR FAMILIES
         </p>
 
         <h1>
@@ -91,18 +113,18 @@
             Safa
         </h1>
 
-        <p class="wedding-date">
-            22 • NOVEMBER • 2026
+        <p class="hero-date">
+            22 · 11 · 2026
         </p>
 
-        <p>
-            Together with our families,
-            we invite you to celebrate
-            our special day.
+        <p class="hero-message">
+            We joyfully invite you to celebrate
+            the beginning of our forever.
         </p>
 
-        <a href="#details" class="button">
-            Our Wedding
+        <a href="#invitation" class="scroll-button">
+            EXPLORE
+            <span>↓</span>
         </a>
 
     </div>
@@ -110,38 +132,41 @@
 </section>
 
 
-<!-- COUNTDOWN -->
+<!-- =====================================================
+     INVITATION
+===================================================== -->
 
-<section class="countdown-section">
+<section class="invitation section" id="invitation">
 
-    <p class="section-small">
-        THE BIG DAY
-    </p>
+    <div class="section-number">
+        01
+    </div>
 
-    <h2>
-        Counting Down To Forever
-    </h2>
+    <div class="section-content">
 
-    <div class="countdown">
+        <p class="eyebrow">
+            THE INVITATION
+        </p>
 
-        <div>
-            <span id="days">00</span>
-            <small>Days</small>
-        </div>
+        <h2>
+            A beautiful beginning
+        </h2>
 
-        <div>
-            <span id="hours">00</span>
-            <small>Hours</small>
-        </div>
+        <div class="decorative-line"></div>
 
-        <div>
-            <span id="minutes">00</span>
-            <small>Minutes</small>
-        </div>
+        <p class="large-text">
+            In the presence of our families and loved ones,
+            we invite you to join us as we begin a new
+            chapter of our lives together.
+        </p>
 
-        <div>
-            <span id="seconds">00</span>
-            <small>Seconds</small>
+        <p>
+            Your presence, prayers and blessings mean
+            more to us than words can express.
+        </p>
+
+        <div class="signature">
+            Shahul <span>&</span> Safa
         </div>
 
     </div>
@@ -149,115 +174,86 @@
 </section>
 
 
-<!-- INVITATION -->
+<!-- =====================================================
+     DATE
+===================================================== -->
 
-<section class="invitation">
+<section class="date-section">
 
-    <p class="section-small">
-        YOU ARE INVITED
-    </p>
+    <div class="date-background"></div>
 
-    <h2>
-        To Celebrate Our Love
-    </h2>
+    <div class="date-overlay"></div>
 
-    <p>
-        Two hearts, two families and one beautiful
-        journey beginning together.
-    </p>
+    <div class="date-content">
 
-    <p>
-        We would be honored to have you with us
-        as we begin this new chapter of our lives.
-    </p>
+        <p class="eyebrow">
+            SAVE THE DATE
+        </p>
+
+        <h2>
+            22
+        </h2>
+
+        <p class="month">
+            NOVEMBER
+        </p>
+
+        <p class="year">
+            2026
+        </p>
+
+        <div class="date-line"></div>
+
+        <p>
+            We can't wait to celebrate with you.
+        </p>
+
+    </div>
 
 </section>
 
 
-<!-- WEDDING DETAILS -->
+<!-- =====================================================
+     COUNTDOWN
+===================================================== -->
 
-<section id="details" class="details">
+<section class="countdown-section section">
 
-    <p class="section-small">
-        JOIN US
-    </p>
+    <div class="section-number">
+        02
+    </div>
 
-    <h2>
-        Wedding Details
-    </h2>
+    <div class="section-content">
 
+        <p class="eyebrow">
+            UNTIL WE SAY I DO
+        </p>
 
-    <div class="event-container">
+        <h2>
+            Counting down
+        </h2>
 
+        <div class="countdown">
 
-        <!-- NIKAH -->
-
-        <div class="event-card">
-
-            <div class="event-icon">
-                ☾
+            <div class="count-box">
+                <span id="days">00</span>
+                <small>DAYS</small>
             </div>
 
-            <h3>
-                Nikah
-            </h3>
-
-            <div class="line"></div>
-
-            <p class="event-date">
-                22 November 2026
-            </p>
-
-            <p>
-                10:00 AM
-            </p>
-
-            <p>
-                Venue Name
-                <br>
-                Kerala, India
-            </p>
-
-            <a href="#location"
-               class="event-button">
-                View Location
-            </a>
-
-        </div>
-
-
-        <!-- RECEPTION -->
-
-        <div class="event-card">
-
-            <div class="event-icon">
-                ♡
+            <div class="count-box">
+                <span id="hours">00</span>
+                <small>HOURS</small>
             </div>
 
-            <h3>
-                Reception
-            </h3>
+            <div class="count-box">
+                <span id="minutes">00</span>
+                <small>MINUTES</small>
+            </div>
 
-            <div class="line"></div>
-
-            <p class="event-date">
-                22 November 2026
-            </p>
-
-            <p>
-                06:00 PM
-            </p>
-
-            <p>
-                Reception Venue
-                <br>
-                Kerala, India
-            </p>
-
-            <a href="#location"
-               class="event-button">
-                View Location
-            </a>
+            <div class="count-box">
+                <span id="seconds">00</span>
+                <small>SECONDS</small>
+            </div>
 
         </div>
 
@@ -266,9 +262,111 @@
 </section>
 
 
-<!-- OUR STORY -->
+<!-- =====================================================
+     WEDDING EVENTS
+===================================================== -->
 
-<section class="story">
+<section class="events section">
+
+    <div class="section-number">
+        03
+    </div>
+
+    <div class="section-content">
+
+        <p class="eyebrow">
+            JOIN US
+        </p>
+
+        <h2>
+            Wedding Details
+        </h2>
+
+        <div class="events-grid">
+
+            <!-- NIKAH -->
+
+            <article class="event-card">
+
+                <div class="event-top">
+                    <span>01</span>
+                    <span>☾</span>
+                </div>
+
+                <h3>
+                    Nikah
+                </h3>
+
+                <div class="event-divider"></div>
+
+                <p class="event-date">
+                    22 November 2026
+                </p>
+
+                <p>
+                    10:00 AM
+                </p>
+
+                <p class="event-place">
+                    Venue Name
+                    <br>
+                    Kerala, India
+                </p>
+
+                <a href="#location">
+                    VIEW LOCATION →
+                </a>
+
+            </article>
+
+
+            <!-- RECEPTION -->
+
+            <article class="event-card">
+
+                <div class="event-top">
+                    <span>02</span>
+                    <span>♡</span>
+                </div>
+
+                <h3>
+                    Reception
+                </h3>
+
+                <div class="event-divider"></div>
+
+                <p class="event-date">
+                    22 November 2026
+                </p>
+
+                <p>
+                    06:00 PM
+                </p>
+
+                <p class="event-place">
+                    Reception Venue
+                    <br>
+                    Kerala, India
+                </p>
+
+                <a href="#location">
+                    VIEW LOCATION →
+                </a>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STORY
+===================================================== -->
+
+<section class="story section">
 
     <div class="story-image">
 
@@ -279,29 +377,162 @@
 
     <div class="story-content">
 
-        <p class="section-small">
+        <div class="section-number">
+            04
+        </div>
+
+        <p class="eyebrow">
             OUR STORY
         </p>
 
         <h2>
-            Two Hearts,
-            One Journey
+            And so our story begins...
         </h2>
 
-        <p>
-            Some stories are written in books,
-            while others are written in the heart.
+        <div class="decorative-line"></div>
+
+        <p class="large-text">
+            Two people, two families and countless
+            moments have brought us to this beautiful day.
         </p>
 
         <p>
-            Our journey brought two people together
-            and we are now ready to begin a beautiful
-            new chapter together.
+            With gratitude in our hearts and excitement
+            for everything ahead, we are beginning our
+            journey together.
         </p>
 
+        <div class="signature">
+            S <span>&</span> S
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
+
+<section class="gallery section">
+
+    <div class="section-number">
+        05
+    </div>
+
+    <div class="section-content">
+
+        <p class="eyebrow">
+            MEMORIES
+        </p>
+
+        <h2>
+            Moments we treasure
+        </h2>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item large">
+                <img src="images/photo1.jpg" alt="">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/photo2.jpg" alt="">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/photo3.jpg" alt="">
+            </div>
+
+            <div class="gallery-item wide">
+                <img src="images/couple.jpg" alt="">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LOCATION
+===================================================== -->
+
+<section class="location section" id="location">
+
+    <div class="section-number">
+        06
+    </div>
+
+    <div class="section-content">
+
+        <p class="eyebrow">
+            COME CELEBRATE WITH US
+        </p>
+
+        <h2>
+            The Venue
+        </h2>
+
+        <div class="venue-box">
+
+            <div class="venue-icon">
+                ♧
+            </div>
+
+            <h3>
+                Wedding Venue
+            </h3>
+
+            <p>
+                Venue Name
+            </p>
+
+            <p>
+                Kerala, India
+            </p>
+
+            <a
+                href="https://maps.google.com"
+                target="_blank"
+                class="dark-button">
+
+                OPEN IN GOOGLE MAPS
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DRESS CODE
+===================================================== -->
+
+<section class="dress-code section">
+
+    <div class="section-content">
+
+        <p class="eyebrow">
+            DRESS CODE
+        </p>
+
+        <h2>
+            Elegant & Timeless
+        </h2>
+
+        <div class="dress-circle">
+            <span>FORMAL</span>
+        </div>
+
         <p>
-            With the love and blessings of our families,
-            we invite you to be part of our special day.
+            We invite you to dress in your
+            finest attire and celebrate with us.
         </p>
 
     </div>
@@ -309,127 +540,75 @@
 </section>
 
 
-<!-- GALLERY -->
+<!-- =====================================================
+     RSVP
+===================================================== -->
 
-<section class="gallery">
+<section class="rsvp section">
 
-    <p class="section-small">
-        MEMORIES
-    </p>
+    <div class="section-number">
+        07
+    </div>
 
-    <h2>
-        Our Moments
-    </h2>
+    <div class="section-content">
 
-    <div class="gallery-grid">
+        <p class="eyebrow">
+            RSVP
+        </p>
 
-        <img src="images/photo1.jpg"
-             alt="Wedding photo">
+        <h2>
+            Will you join us?
+        </h2>
 
-        <img src="images/photo2.jpg"
-             alt="Wedding photo">
+        <p class="large-text">
+            Your presence will make our special day
+            even more meaningful.
+        </p>
 
-        <img src="images/photo3.jpg"
-             alt="Wedding photo">
+        <a
+            href="https://wa.me/974XXXXXXXX"
+            target="_blank"
+            class="dark-button">
 
-        <img src="images/couple.jpg"
-             alt="Shahul and Safa">
+            CONFIRM ATTENDANCE
+
+        </a>
 
     </div>
 
 </section>
 
 
-<!-- LOCATION -->
-
-<section id="location" class="location">
-
-    <p class="section-small">
-        FIND US
-    </p>
-
-    <h2>
-        Wedding Venue
-    </h2>
-
-    <p>
-        Venue Name
-    </p>
-
-    <p>
-        Kerala, India
-    </p>
-
-    <a
-        href="https://maps.google.com"
-        target="_blank"
-        class="button">
-
-        Open Google Maps
-
-    </a>
-
-</section>
-
-
-<!-- RSVP -->
-
-<section class="rsvp">
-
-    <p class="section-small">
-        RSVP
-    </p>
-
-    <h2>
-        Will You Join Us?
-    </h2>
-
-    <p>
-        Your presence would make our celebration
-        even more special.
-    </p>
-
-    <a
-        href="https://wa.me/XXXXXXXXXXXX"
-        target="_blank"
-        class="whatsapp-button">
-
-        Confirm Attendance
-
-    </a>
-
-</section>
-
-
-<!-- FOOTER -->
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
-    <p>
-        With Love
+    <p class="eyebrow">
+        WITH LOVE
     </p>
 
     <h2>
-        Shahul & Safa
+        Shahul
+        <span>&</span>
+        Safa
     </h2>
 
     <p>
-        22 • 11 • 2026
+        22 · 11 · 2026
     </p>
 
-    <p class="copyright">
-        Made with ❤️ for our special day
+    <div class="footer-line"></div>
+
+    <p class="footer-small">
+        We look forward to celebrating with you.
     </p>
 
 </footer>
 
 
-</main>
-
-
-<!-- =========================================
-     JAVASCRIPT
-========================================= -->
+</div>
 
 <script src="script.js"></script>
 
