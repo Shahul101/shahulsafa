@@ -1,31 +1,78 @@
-/* =========================================
-   OPEN INVITATION
-========================================= */
+/* =====================================================
+   ENVELOPE OPENING
+===================================================== */
 
 const openButton =
-    document.getElementById("openInvitation");
+    document.getElementById("openButton");
 
-const openingScreen =
-    document.getElementById("opening-screen");
+const envelopeScreen =
+    document.getElementById("envelopeScreen");
+
+const envelope =
+    document.querySelector(".envelope");
+
+const music =
+    document.getElementById("weddingMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
 
 openButton.addEventListener("click", function () {
 
-    openingScreen.classList.add("hide");
+    envelope.classList.add("open");
+
+    setTimeout(function () {
+
+        envelopeScreen.classList.add("opened");
+
+    }, 1200);
 
 });
 
 
-/* =========================================
-   WEDDING COUNTDOWN
-========================================= */
+/* =====================================================
+   MUSIC
+===================================================== */
+
+let musicPlaying = false;
+
+
+musicButton.addEventListener("click", function () {
+
+    if (musicPlaying) {
+
+        music.pause();
+
+        musicButton.innerHTML = "♫";
+
+        musicPlaying = false;
+
+    } else {
+
+        music.play();
+
+        musicButton.innerHTML = "❚❚";
+
+        musicPlaying = true;
+
+    }
+
+});
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
 
 /*
-   Change this date/time according to
-   your actual wedding date.
+    CHANGE THIS DATE IF REQUIRED
 */
 
 const weddingDate =
-    new Date("November 22, 2026 10:00:00").getTime();
+    new Date(
+        "November 22, 2026 10:00:00"
+    ).getTime();
 
 
 function updateCountdown() {
@@ -111,14 +158,18 @@ setInterval(
 );
 
 
-/* =========================================
-   INVITATION LINK
-========================================= */
+/* =====================================================
+   INVITATION URL
+===================================================== */
 
 /*
-   Example:
 
-   fazilshifana.pages.dev/?invite=reception
+Examples:
+
+fazilshifana.pages.dev/?invite=reception
+
+fazilshifana.pages.dev/?invite=nikah
+
 */
 
 const params =
@@ -133,7 +184,7 @@ const invitation =
 if (invitation === "reception") {
 
     console.log(
-        "Reception invitation opened"
+        "Reception invitation"
     );
 
 }
@@ -142,7 +193,7 @@ if (invitation === "reception") {
 if (invitation === "nikah") {
 
     console.log(
-        "Nikah invitation opened"
+        "Nikah invitation"
     );
 
 }
