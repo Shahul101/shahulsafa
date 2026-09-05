@@ -1,616 +1,285 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahul &amp; Safa — Wedding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F4EDE2;
+    --ivory-deep:#EDE3D3;
+    --brown-deep:#3B2A20;
+    --brown:#6B4A34;
+    --brown-soft:#9C7A56;
+    --gold:#B08D57;
+    --line:#D8C7AC;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--ivory);
+    color:var(--brown-deep);
+    font-family:'EB Garamond', serif;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Cormorant Garamond', serif;}
 
-    <title>Shahul & Safa | Wedding Invitation</title>
+  /* ---------- Envelope intro ---------- */
+  #envelope-screen{
+    position:fixed; inset:0; z-index:50;
+    background:var(--brown-deep);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:opacity 1.1s ease, visibility 1.1s ease;
+  }
+  #envelope-screen.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  .envelope{
+    position:relative;
+    width:min(78vw, 320px);
+    aspect-ratio:1.42/1;
+  }
+  .env-back{
+    position:absolute; inset:0;
+    background:var(--ivory-deep);
+    border:1px solid var(--gold);
+  }
+  .env-flap{
+    position:absolute; top:0; left:0; right:0; height:100%;
+    background:var(--brown);
+    clip-path:polygon(0 0, 100% 0, 50% 62%);
+    transform-origin:top center;
+    transition:transform 1s cubic-bezier(.6,.1,.3,1);
+    z-index:3;
+  }
+  #envelope-screen.opening .env-flap{ transform:rotateX(180deg); }
+  .env-seal{
+    position:absolute; top:50%; left:50%;
+    transform:translate(-50%,-58%);
+    width:46px; height:46px; border-radius:50%;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    color:var(--brown-deep); font-size:15px; letter-spacing:1px;
+    z-index:4;
+    transition:opacity .4s ease;
+  }
+  #envelope-screen.opening .env-seal{ opacity:0; }
+  .env-hint{
+    position:absolute; bottom:-46px; left:0; right:0; text-align:center;
+    color:var(--ivory); font-size:14px; letter-spacing:.06em;
+    transition:opacity .4s ease;
+  }
+  #envelope-screen.opening .env-hint{ opacity:0; }
 
-    <link rel="stylesheet" href="style.css">
+  /* ---------- Page ---------- */
+  .wrap{max-width:640px; margin:0 auto; padding:0 28px;}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  header.hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:60px 24px;
+  }
+  .kicker{
+    font-size:14px; letter-spacing:.18em; color:var(--brown-soft);
+  }
+  .names{
+    font-size:clamp(52px, 12vw, 92px);
+    line-height:1.02;
+    margin:18px 0 10px;
+    font-weight:500;
+  }
+  .amp{
+    display:block;
+    font-style:italic;
+    font-size:0.55em;
+    color:var(--gold);
+    margin:2px 0;
+  }
+  .hero-date{
+    font-size:18px; letter-spacing:.08em; color:var(--brown);
+    margin-top:8px;
+  }
+  .rule{
+    width:64px; height:1px; background:var(--line); margin:26px auto;
+  }
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+  /* countdown */
+  .countdown{
+    display:flex; gap:22px; justify-content:center; margin-top:6px;
+    flex-wrap:wrap;
+  }
+  .countdown .unit{ text-align:center; min-width:64px; }
+  .countdown .num{
+    font-family:'Cormorant Garamond', serif;
+    font-size:44px; color:var(--brown-deep);
+    font-variant-numeric: tabular-nums;
+  }
+  .countdown .lbl{
+    font-size:11px; letter-spacing:.14em; color:var(--brown-soft);
+    margin-top:2px;
+  }
+
+  section{ padding:90px 0; border-top:1px solid var(--line); }
+  section:first-of-type{ border-top:none; }
+  .section-head{ text-align:center; margin-bottom:44px; }
+  .section-title{ font-size:38px; margin:0; font-weight:500; }
+  .section-sub{ color:var(--brown-soft); font-size:16px; margin-top:8px; font-style:italic; }
+
+  .story p{
+    font-size:19px; line-height:1.75; color:var(--brown-deep);
+    text-align:center;
+    max-width:480px; margin:0 auto 20px;
+  }
+
+  .details-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:36px;
+  }
+  .detail-card{ text-align:center; }
+  .detail-card .icon{
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    font-size:15px; color:var(--gold); letter-spacing:.08em;
+  }
+  .detail-card h3{ font-size:26px; margin:10px 0 6px; font-weight:500; }
+  .detail-card p{ margin:0; color:var(--brown); line-height:1.6; font-size:16px; }
+
+  .rsvp{ text-align:center; }
+  .rsvp p{ color:var(--brown); font-size:17px; max-width:420px; margin:0 auto 30px; line-height:1.7; }
+  .btn{
+    display:inline-block;
+    padding:14px 40px;
+    background:var(--brown-deep);
+    color:var(--ivory);
+    text-decoration:none;
+    font-size:15px; letter-spacing:.1em;
+    border:1px solid var(--brown-deep);
+    transition:background .3s ease, color .3s ease;
+  }
+  .btn:hover{ background:transparent; color:var(--brown-deep); }
+
+  footer{
+    text-align:center; padding:50px 24px 60px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic; color:var(--brown-soft); font-size:16px;
+  }
+
+  @media (max-width:520px){
+    .details-grid{ grid-template-columns:1fr; gap:40px; }
+    .countdown{ gap:14px; }
+    .countdown .unit{ min-width:52px; }
+    .countdown .num{ font-size:34px; }
+    section{ padding:64px 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .env-flap, .env-seal, .env-hint, #envelope-screen{ transition:none !important; }
+  }
+</style>
 </head>
-
 <body>
 
-<!-- =====================================================
-     MUSIC
-===================================================== -->
-
-<audio id="weddingMusic" loop>
-    <source src="music/wedding.mp3" type="audio/mpeg">
-</audio>
-
-<button class="music-button" id="musicButton">
-    ♫
-</button>
-
-
-<!-- =====================================================
-     ENVELOPE INTRO
-===================================================== -->
-
-<div class="envelope-screen" id="envelopeScreen">
-
-    <div class="envelope-wrapper">
-
-        <p class="intro-small">
-            TOGETHER WITH THEIR FAMILIES
-        </p>
-
-        <div class="envelope">
-
-            <div class="envelope-back"></div>
-
-            <div class="envelope-paper">
-
-                <p class="paper-small">
-                    YOU ARE INVITED
-                </p>
-
-                <h1>
-                    Shahul
-                    <span>&</span>
-                    Safa
-                </h1>
-
-                <p>
-                    22 November 2026
-                </p>
-
-            </div>
-
-            <div class="envelope-flap"></div>
-
-            <div class="wax-seal">
-                S & S
-            </div>
-
-        </div>
-
-        <button class="open-button" id="openButton">
-            OPEN INVITATION
-        </button>
-
+<div id="envelope-screen">
+  <div class="envelope">
+    <div class="env-back"></div>
+    <div class="env-flap">
+      <div class="env-seal">N&amp;S</div>
     </div>
-
+    <div class="env-hint">tap to open your invitation</div>
+  </div>
 </div>
 
+<header class="hero">
+  <div class="kicker">TOGETHER WITH THEIR FAMILIES</div>
+  <h1 class="names display">Shahul<span class="amp">&amp;</span>Safa</h1>
+  <div class="hero-date">SUNDAY, NOVEMBER 22, 2026</div>
+  <div class="rule"></div>
+  <div class="countdown" id="countdown">
+    <div class="unit"><div class="num" id="cd-days">00</div><div class="lbl">DAYS</div></div>
+    <div class="unit"><div class="num" id="cd-hours">00</div><div class="lbl">HOURS</div></div>
+    <div class="unit"><div class="num" id="cd-mins">00</div><div class="lbl">MINUTES</div></div>
+    <div class="unit"><div class="num" id="cd-secs">00</div><div class="lbl">SECONDS</div></div>
+  </div>
+</header>
 
-<!-- =====================================================
-     MAIN WEBSITE
-===================================================== -->
-
-<div class="website" id="website">
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-    <div class="hero-image"></div>
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-
-        <p class="arabic">
-            بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ
-        </p>
-
-        <p class="eyebrow">
-            WITH THE BLESSINGS OF OUR FAMILIES
-        </p>
-
-        <h1>
-            Shahul
-            <span>&</span>
-            Safa
-        </h1>
-
-        <p class="hero-date">
-            22 · 11 · 2026
-        </p>
-
-        <p class="hero-message">
-            We joyfully invite you to celebrate
-            the beginning of our forever.
-        </p>
-
-        <a href="#invitation" class="scroll-button">
-            EXPLORE
-            <span>↓</span>
-        </a>
-
+<section class="story">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title display">Our Story</h2>
+      <div class="section-sub">a short note before the day</div>
     </div>
-
+    <p>What began as a quiet friendship grew, slowly and then all at once, into a lifetime we want to spend together. We're so glad you'll be there to see it begin.</p>
+    <p>This page will carry every update as our day gets closer — where to be, when, and how to let us know you're coming.</p>
+  </div>
 </section>
 
-
-<!-- =====================================================
-     INVITATION
-===================================================== -->
-
-<section class="invitation section" id="invitation">
-
-    <div class="section-number">
-        01
+<section class="details">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title display">The Details</h2>
+      <div class="section-sub">Sunday, November 22nd, 2026</div>
     </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            THE INVITATION
-        </p>
-
-        <h2>
-            A beautiful beginning
-        </h2>
-
-        <div class="decorative-line"></div>
-
-        <p class="large-text">
-            In the presence of our families and loved ones,
-            we invite you to join us as we begin a new
-            chapter of our lives together.
-        </p>
-
-        <p>
-            Your presence, prayers and blessings mean
-            more to us than words can express.
-        </p>
-
-        <div class="signature">
-            Shahul <span>&</span> Safa
-        </div>
-
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="icon">CEREMONY</div>
+        <h3 class="display">4:00 in the afternoon</h3>
+        <p>Venue name<br>Street address, City</p>
+      </div>
+      <div class="detail-card">
+        <div class="icon">RECEPTION</div>
+        <h3 class="display">7:00 in the evening</h3>
+        <p>Venue name<br>Street address, City</p>
+      </div>
     </div>
-
+  </div>
 </section>
 
-
-<!-- =====================================================
-     DATE
-===================================================== -->
-
-<section class="date-section">
-
-    <div class="date-background"></div>
-
-    <div class="date-overlay"></div>
-
-    <div class="date-content">
-
-        <p class="eyebrow">
-            SAVE THE DATE
-        </p>
-
-        <h2>
-            22
-        </h2>
-
-        <p class="month">
-            NOVEMBER
-        </p>
-
-        <p class="year">
-            2026
-        </p>
-
-        <div class="date-line"></div>
-
-        <p>
-            We can't wait to celebrate with you.
-        </p>
-
+<section class="rsvp">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title display">Will You Join Us?</h2>
     </div>
-
+    <p>Kindly let us know by October 1st, 2026 so we can save you a seat at the table.</p>
+    <a class="btn" href="#">RSVP</a>
+  </div>
 </section>
 
-
-<!-- =====================================================
-     COUNTDOWN
-===================================================== -->
-
-<section class="countdown-section section">
-
-    <div class="section-number">
-        02
-    </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            UNTIL WE SAY I DO
-        </p>
-
-        <h2>
-            Counting down
-        </h2>
-
-        <div class="countdown">
-
-            <div class="count-box">
-                <span id="days">00</span>
-                <small>DAYS</small>
-            </div>
-
-            <div class="count-box">
-                <span id="hours">00</span>
-                <small>HOURS</small>
-            </div>
-
-            <div class="count-box">
-                <span id="minutes">00</span>
-                <small>MINUTES</small>
-            </div>
-
-            <div class="count-box">
-                <span id="seconds">00</span>
-                <small>SECONDS</small>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     WEDDING EVENTS
-===================================================== -->
-
-<section class="events section">
-
-    <div class="section-number">
-        03
-    </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            JOIN US
-        </p>
-
-        <h2>
-            Wedding Details
-        </h2>
-
-        <div class="events-grid">
-
-            <!-- NIKAH -->
-
-            <article class="event-card">
-
-                <div class="event-top">
-                    <span>01</span>
-                    <span>☾</span>
-                </div>
-
-                <h3>
-                    Nikah
-                </h3>
-
-                <div class="event-divider"></div>
-
-                <p class="event-date">
-                    22 November 2026
-                </p>
-
-                <p>
-                    10:00 AM
-                </p>
-
-                <p class="event-place">
-                    Venue Name
-                    <br>
-                    Kerala, India
-                </p>
-
-                <a href="#location">
-                    VIEW LOCATION →
-                </a>
-
-            </article>
-
-
-            <!-- RECEPTION -->
-
-            <article class="event-card">
-
-                <div class="event-top">
-                    <span>02</span>
-                    <span>♡</span>
-                </div>
-
-                <h3>
-                    Reception
-                </h3>
-
-                <div class="event-divider"></div>
-
-                <p class="event-date">
-                    22 November 2026
-                </p>
-
-                <p>
-                    06:00 PM
-                </p>
-
-                <p class="event-place">
-                    Reception Venue
-                    <br>
-                    Kerala, India
-                </p>
-
-                <a href="#location">
-                    VIEW LOCATION →
-                </a>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     STORY
-===================================================== -->
-
-<section class="story section">
-
-    <div class="story-image">
-
-        <img src="images/couple.jpg"
-             alt="Shahul and Safa">
-
-    </div>
-
-    <div class="story-content">
-
-        <div class="section-number">
-            04
-        </div>
-
-        <p class="eyebrow">
-            OUR STORY
-        </p>
-
-        <h2>
-            And so our story begins...
-        </h2>
-
-        <div class="decorative-line"></div>
-
-        <p class="large-text">
-            Two people, two families and countless
-            moments have brought us to this beautiful day.
-        </p>
-
-        <p>
-            With gratitude in our hearts and excitement
-            for everything ahead, we are beginning our
-            journey together.
-        </p>
-
-        <div class="signature">
-            S <span>&</span> S
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     GALLERY
-===================================================== -->
-
-<section class="gallery section">
-
-    <div class="section-number">
-        05
-    </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            MEMORIES
-        </p>
-
-        <h2>
-            Moments we treasure
-        </h2>
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item large">
-                <img src="images/photo1.jpg" alt="">
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/photo2.jpg" alt="">
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/photo3.jpg" alt="">
-            </div>
-
-            <div class="gallery-item wide">
-                <img src="images/couple.jpg" alt="">
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     LOCATION
-===================================================== -->
-
-<section class="location section" id="location">
-
-    <div class="section-number">
-        06
-    </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            COME CELEBRATE WITH US
-        </p>
-
-        <h2>
-            The Venue
-        </h2>
-
-        <div class="venue-box">
-
-            <div class="venue-icon">
-                ♧
-            </div>
-
-            <h3>
-                Wedding Venue
-            </h3>
-
-            <p>
-                Venue Name
-            </p>
-
-            <p>
-                Kerala, India
-            </p>
-
-            <a
-                href="https://maps.google.com"
-                target="_blank"
-                class="dark-button">
-
-                OPEN IN GOOGLE MAPS
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     DRESS CODE
-===================================================== -->
-
-<section class="dress-code section">
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            DRESS CODE
-        </p>
-
-        <h2>
-            Elegant & Timeless
-        </h2>
-
-        <div class="dress-circle">
-            <span>FORMAL</span>
-        </div>
-
-        <p>
-            We invite you to dress in your
-            finest attire and celebrate with us.
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     RSVP
-===================================================== -->
-
-<section class="rsvp section">
-
-    <div class="section-number">
-        07
-    </div>
-
-    <div class="section-content">
-
-        <p class="eyebrow">
-            RSVP
-        </p>
-
-        <h2>
-            Will you join us?
-        </h2>
-
-        <p class="large-text">
-            Your presence will make our special day
-            even more meaningful.
-        </p>
-
-        <a
-            href="https://wa.me/974XXXXXXXX"
-            target="_blank"
-            class="dark-button">
-
-            CONFIRM ATTENDANCE
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <p class="eyebrow">
-        WITH LOVE
-    </p>
-
-    <h2>
-        Shahul
-        <span>&</span>
-        Safa
-    </h2>
-
-    <p>
-        22 · 11 · 2026
-    </p>
-
-    <div class="footer-line"></div>
-
-    <p class="footer-small">
-        We look forward to celebrating with you.
-    </p>
-
-</footer>
-
-
-</div>
-
-<script src="script.js"></script>
+<footer>Shahul &amp; Safa  · November 22, 2026</footer>
+
+<script>
+  const envelopeScreen = document.getElementById('envelope-screen');
+  envelopeScreen.addEventListener('click', () => {
+    envelopeScreen.classList.add('opening');
+    setTimeout(() => envelopeScreen.classList.add('hidden'), 550);
+  });
+
+  const weddingDate = new Date('2026-11-22T16:00:00');
+  const els = {
+    days: document.getElementById('cd-days'),
+    hours: document.getElementById('cd-hours'),
+    mins: document.getElementById('cd-mins'),
+    secs: document.getElementById('cd-secs'),
+  };
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    const now = new Date();
+    let diff = weddingDate - now;
+    if(diff < 0) diff = 0;
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+    els.days.textContent = pad(days);
+    els.hours.textContent = pad(hours);
+    els.mins.textContent = pad(mins);
+    els.secs.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
 
 </body>
 </html>
