@@ -27,118 +27,93 @@
   }
   .display{font-family:'Cormorant Garamond', serif;}
 
-  /* ---------- Envelope intro ---------- */
-  #envelope-screen{
+  /* ---------- Intro: parting doors reveal ---------- */
+  #intro-screen{
     position:fixed; inset:0; z-index:50;
-    background:#140D08;
-    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
     cursor:pointer;
-    perspective:1600px;
-    transition:opacity 1s ease .25s, visibility 1s ease .25s;
   }
-  #envelope-screen.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  #intro-screen.hidden{ visibility:hidden; pointer-events:none; }
 
-  .envelope{
-    position:relative;
-    width:min(80vw, 320px);
-    aspect-ratio:.74/1;
-    transform-style:preserve-3d;
-    transition:transform .9s cubic-bezier(.6,.1,.3,1) .15s, opacity .7s ease .35s;
-  }
-  #envelope-screen.opening .envelope{
-    transform:scale(.92);
-    opacity:0;
-  }
-
-  /* shared lace-fabric look, used on both the body and the flap */
-  .env-back, .env-flap{
-    background-color:#3C2A1B;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23F2E4C8' stroke-width='0.7' opacity='0.16'%3E%3Ccircle cx='32' cy='32' r='11'/%3E%3Ccircle cx='0' cy='0' r='11'/%3E%3Ccircle cx='64' cy='0' r='11'/%3E%3Ccircle cx='0' cy='64' r='11'/%3E%3Ccircle cx='64' cy='64' r='11'/%3E%3Cpath d='M32 21c-6 2-6 9 0 11c6-2 6-9 0-11z'/%3E%3Cpath d='M21 32c2-6 9-6 11 0c-2 6-9 6-11 0z'/%3E%3Cpath d='M32 43c6-2 6-9 0-11c-6 2-6 9 0 11z'/%3E%3Cpath d='M43 32c-2-6-9-6-11 0c2 6 9 6 11 0z'/%3E%3C/g%3E%3C/svg%3E"),
-      radial-gradient(120% 90% at 50% 6%, rgba(255,255,255,.06), transparent 55%),
-      linear-gradient(165deg, #4E3420 0%, #33200F 55%, #241408 100%);
-    background-size:64px 64px, cover, cover;
-  }
-
-  .env-back{
-    position:absolute; inset:0;
-    box-shadow:0 40px 80px -24px rgba(0,0,0,.7);
-  }
-  .env-back .grain{
-    position:absolute; inset:0;
-    filter:url(#fabricGrain);
-    opacity:.5;
-    mix-blend-mode:overlay;
-    pointer-events:none;
-  }
-  .env-back::before{
-    content:"";
-    position:absolute; inset:9px;
-    border:1px solid rgba(230,209,173,.22);
-    pointer-events:none;
-  }
-  .env-back::after{
-    content:"";
-    position:absolute; left:9px; right:9px; bottom:9px; height:46%;
+  .door{
+    position:absolute; top:0; bottom:0; width:50%;
     background:
-      linear-gradient(115deg, transparent 48%, rgba(0,0,0,.22) 49%, transparent 51%),
-      linear-gradient(65deg, transparent 48%, rgba(0,0,0,.22) 49%, transparent 51%);
-    opacity:.7;
+      radial-gradient(140% 100% at 50% 0%, rgba(255,255,255,.05), transparent 55%),
+      linear-gradient(160deg, #241A12 0%, #170F09 60%, #100A05 100%);
+    transition:transform 1.15s cubic-bezier(.76,0,.24,1);
+  }
+  .door.left{ left:0; border-right:1px solid rgba(205,167,101,.28); }
+  .door.right{ right:0; border-left:1px solid rgba(205,167,101,.28); }
+  #intro-screen.opening .door.left{ transform:translateX(-100%); }
+  #intro-screen.opening .door.right{ transform:translateX(100%); }
+
+  .intro-content{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; z-index:2; pointer-events:none;
+    transition:opacity .7s ease, transform .8s cubic-bezier(.22,.61,.24,1);
+  }
+  #intro-screen.opening .intro-content{
+    opacity:0; transform:translateY(-18px) scale(1.04);
   }
 
-  .env-copy{
-    position:absolute; top:11%; left:0; right:0; text-align:center;
-    z-index:2; pointer-events:none;
-  }
-  .env-copy .join{
+  .intro-kicker{
     font-family:'EB Garamond', serif; font-style:italic;
-    font-size:10.5px; letter-spacing:.3em; color:#E9DAC0;
-  }
-  .env-copy .env-names{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    font-size:26px; letter-spacing:.16em; color:#F7EEDD;
-    margin-top:18px; line-height:1.6;
-  }
-  .env-copy .env-amp{
-    display:block; font-style:italic; font-weight:400; font-size:.6em; color:#D9C39A; margin:0;
+    font-size:12px; letter-spacing:.34em; color:#CDA765;
+    margin-bottom:26px;
   }
 
-  .env-flap{
-    position:absolute; top:0; left:0; right:0; height:56%;
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
-    transform-origin:top center;
-    transition:transform 1s cubic-bezier(.6,.1,.3,1);
-    z-index:3;
-    box-shadow:inset 0 -1px 0 rgba(0,0,0,.3);
-  }
-  #envelope-screen.opening .env-flap{ transform:rotateX(178deg); }
-
-  /* cream wax seal with embossed rose */
-  .env-seal{
-    position:absolute; top:58%; left:50%;
-    transform:translate(-50%,-50%);
-    width:58px; height:76px; border-radius:50%;
-    background:radial-gradient(circle at 32% 24%, #F6EEDD 0%, #E4D6B8 55%, #C9B78D 100%);
+  .medallion{
+    width:104px; height:104px; border-radius:50%;
+    border:1px solid rgba(205,167,101,.55);
     display:flex; align-items:center; justify-content:center;
-    box-shadow:
-      0 8px 16px rgba(0,0,0,.45),
-      inset 0 1px 2px rgba(255,255,255,.6),
-      inset 0 -3px 6px rgba(94,72,40,.35);
-    z-index:4;
-    transition:opacity .3s ease, transform .45s ease;
+    position:relative;
+    margin-bottom:26px;
   }
-  .env-seal svg{ width:30px; height:30px; }
-  #envelope-screen.opening .env-seal{ opacity:0; transform:translate(-50%,-50%) scale(.7); }
+  .medallion::before{
+    content:"";
+    position:absolute; inset:8px; border-radius:50%;
+    border:1px solid rgba(205,167,101,.3);
+  }
+  .medallion .mono{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;
+    font-size:34px; color:#F3E8D6;
+  }
 
-  .env-open-label{
-    position:absolute; top:calc(58% + 48px); left:50%; transform:translateX(-50%);
-    font-family:'EB Garamond', serif; font-style:italic;
-    font-size:11px; letter-spacing:.3em; color:#E9DAC0;
-    z-index:4;
-    transition:opacity .3s ease;
+  .intro-names{
+    font-family:'Cormorant Garamond', serif;
+    font-size:clamp(42px, 9vw, 60px);
+    font-weight:500; color:#F7EEDD;
+    line-height:1.15;
   }
-  #envelope-screen.opening .env-open-label{ opacity:0; }
+  .intro-names .intro-amp{
+    font-style:italic; color:#CDA765; font-size:.7em; padding:0 6px;
+  }
+
+  .intro-date{
+    margin-top:16px;
+    font-size:14px; letter-spacing:.14em; color:#C9B896;
+  }
+
+  .intro-enter{
+    margin-top:44px;
+    font-size:11px; letter-spacing:.32em; color:#CDA765;
+    padding-bottom:6px;
+    border-bottom:1px solid rgba(205,167,101,.5);
+  }
+
+  .flash{
+    position:absolute; top:50%; left:50%;
+    width:20px; height:20px; border-radius:50%;
+    transform:translate(-50%,-50%) scale(0);
+    background:radial-gradient(circle, rgba(247,238,221,.9), rgba(205,167,101,0) 70%);
+    z-index:3; opacity:0; pointer-events:none;
+    transition:transform .9s ease-out, opacity .9s ease-out;
+  }
+  #intro-screen.opening .flash{
+    transform:translate(-50%,-50%) scale(60);
+    opacity:1;
+  }
 
   /* ---------- Page ---------- */
   .wrap{max-width:640px; margin:0 auto; padding:0 28px;}
@@ -242,45 +217,26 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .env-flap, .env-seal, .env-hint, #envelope-screen{ transition:none !important; }
+    .door, .intro-content, .flash{ transition:none !important; }
   }
 </style>
 </head>
 <body>
 
-<svg width="0" height="0" style="position:absolute">
-  <filter id="fabricGrain">
-    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/>
-    <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0"/>
-  </filter>
-</svg>
-
-<div id="envelope-screen">
-  <div class="envelope">
-    <div class="env-back"><div class="grain"></div></div>
-    <div class="env-flap">
-      <div class="env-copy">
-        <div class="join">Join us for our special day</div>
-        <div class="env-names">Shahul<span class="env-amp">&amp;</span>Safa</div>
-      </div>
-    </div>
-    <div class="env-seal">
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#8C6F49" stroke-width="1" stroke-linecap="round" opacity="0.75">
-          <path d="M20 12c-2.5 1.6-2.5 5 0 6.6c2.5-1.6 2.5-5 0-6.6z"/>
-          <path d="M15.5 15c1 2.5 3 3.4 4.5 3.6"/>
-          <path d="M24.5 15c-1 2.5-3 3.4-4.5 3.6"/>
-          <path d="M20 18.6v10.4"/>
-          <path d="M20 22c-3-.5-5 1-6 3"/>
-          <path d="M20 25c3-.5 5 1 6 3"/>
-        </g>
-      </svg>
-    </div>
-    <div class="env-open-label">Open</div>
+<div id="intro-screen">
+  <div class="door left"></div>
+  <div class="door right"></div>
+  <div class="flash"></div>
+  <div class="intro-content">
+    <div class="intro-kicker">The wedding of</div>
+    <div class="medallion"><span class="mono">N·S</span></div>
+    <div class="intro-names display">Shahul<span class="intro-amp">&amp;</span>Safa</div>
+    <div class="intro-date">22 November 2026</div>
+    <div class="intro-enter">Click to enter</div>
   </div>
 </div>
 
-<header class="hero">
+<!-- <header class="hero">
   <div class="kicker">TOGETHER WITH THEIR FAMILIES</div>
   <h1 class="names display">Nam<span class="amp">&amp;</span>Shahu</h1>
   <div class="hero-date">SUNDAY, NOVEMBER 22, 2026</div>
@@ -291,7 +247,7 @@
     <div class="unit"><div class="num" id="cd-mins">00</div><div class="lbl">MINUTES</div></div>
     <div class="unit"><div class="num" id="cd-secs">00</div><div class="lbl">SECONDS</div></div>
   </div>
-</header>
+</header> -->
 <!-- 
 <section class="story">
   <div class="wrap">
@@ -302,9 +258,9 @@
     <p>What began as a quiet friendship grew, slowly and then all at once, into a lifetime we want to spend together. We're so glad you'll be there to see it begin.</p>
     <p>This page will carry every update as our day gets closer — where to be, when, and how to let us know you're coming.</p>
   </div>
-</section>
+</section> -->
 
-<section class="details">
+<!-- <section class="details">
   <div class="wrap">
     <div class="section-head">
       <h2 class="section-title display">The Details</h2>
@@ -323,9 +279,9 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="rsvp">
+<!-- <section class="rsvp">
   <div class="wrap">
     <div class="section-head">
       <h2 class="section-title display">Will You Join Us?</h2>
@@ -335,13 +291,14 @@
   </div>
 </section> -->
 
-<footer>Shahul &amp; Safa · November 22, 2026</footer>
+<footer>Sha &amp; Safa · November 22, 2026</footer>
 
 <script>
-  const envelopeScreen = document.getElementById('envelope-screen');
-  envelopeScreen.addEventListener('click', () => {
-    envelopeScreen.classList.add('opening');
-    setTimeout(() => envelopeScreen.classList.add('hidden'), 550);
+  const introScreen = document.getElementById('intro-screen');
+  introScreen.addEventListener('click', () => {
+    if (introScreen.classList.contains('opening')) return;
+    introScreen.classList.add('opening');
+    setTimeout(() => introScreen.classList.add('hidden'), 1250);
   });
 
   const weddingDate = new Date('2026-11-22T16:00:00');
